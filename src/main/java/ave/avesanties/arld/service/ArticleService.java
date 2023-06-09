@@ -1,9 +1,13 @@
 package ave.avesanties.arld.service;
 
+import ave.avesanties.arld.model.Article;
+import ave.avesanties.arld.model.ArticleRepository;
 import java.util.List;
 import java.util.Optional;
-import ave.avesanties.arld.model.Article;
 
+/**
+ * Describes service which interacts with {@link ArticleRepository}.
+ */
 public interface ArticleService {
 
   void saveAll(List<Article> articles);
@@ -13,6 +17,6 @@ public interface ArticleService {
   Optional<Article> getById(Long id);
 
   List<Article> getByNewsSite(String newsSite);
-  
+
   Long countAll();
 }

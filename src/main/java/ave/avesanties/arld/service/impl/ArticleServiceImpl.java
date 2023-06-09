@@ -1,17 +1,20 @@
 package ave.avesanties.arld.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-import org.springframework.stereotype.Service;
 import ave.avesanties.arld.model.Article;
 import ave.avesanties.arld.model.ArticleRepository;
 import ave.avesanties.arld.service.ArticleService;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.stereotype.Service;
 
+/**
+ * Services articles from {@link ArticleRepository}.
+ */
 @Service
 public class ArticleServiceImpl implements ArticleService {
-  
-  private ArticleRepository articlesRepository;
-  
+
+  private final ArticleRepository articlesRepository;
+
   public ArticleServiceImpl(ArticleRepository articlesRepository) {
     this.articlesRepository = articlesRepository;
   }
@@ -33,9 +36,9 @@ public class ArticleServiceImpl implements ArticleService {
 
   @Override
   public List<Article> getByNewsSite(String newsSite) {
-    return articlesRepository.findBynewsSite(newsSite);
+    return articlesRepository.findByNewsSite(newsSite);
   }
-  
+
   @Override
   public Long countAll() {
     return articlesRepository.count();

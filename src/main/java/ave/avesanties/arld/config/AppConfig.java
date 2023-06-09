@@ -4,6 +4,7 @@ import java.time.Duration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -11,12 +12,19 @@ import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 
+/**
+ * This class provides beans configuration.
+ */
 @Configuration
 public class AppConfig {
 
   @Value("${taskExecutor.threads}")
   private int poolSize;
 
+  @Value("${webClient.timeout}")
+  private int timeout;
+
+  @Primary
   @Bean(destroyMethod = "shutdown")
   ThreadPoolTaskExecutor taskExecutor() {
     final ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
@@ -28,9 +36,6 @@ public class AppConfig {
 
     return executor;
   }
-
-  @Value("${webClient.timeout}")
-  private int timeout;
 
   @Bean
   WebClient webClient() {

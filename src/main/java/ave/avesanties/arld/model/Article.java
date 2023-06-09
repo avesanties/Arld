@@ -13,73 +13,85 @@ import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 
+/**
+ * Class represents {@link Article} entity.
+ */
+
 @Entity
 @Table(name = "ARTICLES")
 public class Article {
 
   @Id
-  @SequenceGenerator(name = "speed_seq", initialValue = 1, allocationSize = 50)
+  @SequenceGenerator(name = "speed_seq")
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "speed_seq")
   @Column(name = "id", nullable = false)
   private Long id;
-  
+
   @NotNull
   @Size(min = 1, max = 255)
   @Column(name = "title", nullable = false)
   private String title;
-  
+
   @NotNull
   @Size(min = 1, max = 255)
   @Column(name = "news_site", nullable = false)
   private String newsSite;
-  
+
   @NotNull
   @PastOrPresent
   @Column(name = "published_date", nullable = false)
   private LocalDateTime publishedDate;
-  
+
   @NotNull
   @Lob
   @Column(name = "article", nullable = false, columnDefinition = "CLOB NOT NULL")
-  private String article;
+  private String text;
 
   public Article() {
-
+    //Empty constructor
   }
-  
+
+  /**
+   * Constructs {@link Article} instance.
+   *
+   * @param title self-explanatory.
+   * @param newsSite self-explanatory.
+   * @param publishedDate self-explanatory.
+   * @param text self-explanatory.
+   */
   public Article(@NotNull @Size(min = 1, max = 255) String title,
       @NotNull @Size(min = 1, max = 255) String newsSite,
-      @NotNull @PastOrPresent LocalDateTime publishedDate, @NotNull String article) {
+      @NotNull @PastOrPresent LocalDateTime publishedDate, @NotNull String text) {
     this.title = title;
     this.newsSite = newsSite;
     this.publishedDate = publishedDate;
-    this.article = article;
+    this.text = text;
   }
-  
+
   public Long getId() {
     return id;
   }
 
-  public String getTitle() {
+  public @NotNull String getTitle() {
     return title;
   }
 
-  public String getNewsSite() {
+  public @NotNull String getNewsSite() {
     return newsSite;
   }
 
-  public LocalDateTime getPublishedDate() {
+  public @NotNull LocalDateTime getPublishedDate() {
     return publishedDate;
   }
 
-  public String getArticle() {
-    return article;
+  public @NotNull String getText() {
+    return text;
   }
 
   @Override
   public String toString() {
     return "Article [id=" + id + ", title=" + title + ", newsSite=" + newsSite + ", publishedDate="
-        + publishedDate + ", article=" + article + "]";
+        + publishedDate + ", article=" + text + "]";
   }
 
 }

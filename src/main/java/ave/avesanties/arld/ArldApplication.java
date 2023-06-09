@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ArldApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ArldApplication.class, args);
-	}
-	
+  public static void main(String[] args) {
+    SpringApplication.run(ArldApplication.class, args);
+  }
+
 }
